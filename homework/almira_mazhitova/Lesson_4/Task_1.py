@@ -8,7 +8,7 @@ print(my_dict['tuple'][-1])
 my_dict['list'].append(42)
 my_dict['list'].pop(1)
 
-my_dict['dict']['i am a tuple'] = (2, 3, '')
+my_dict['dict'][('i am a tuple',)] = (2, 3, '')
 del my_dict['dict']['Phone_number']
 
 my_dict['set'].add(888)
