@@ -1,5 +1,7 @@
 students = ['Ivanov', 'Petrov', 'Sidorov']
 subjects = ['math', 'biology', 'geography']
-string = f"Students {students[0]}, {students[1]}, {students[2]} \
-study these subjects: {subjects[0]}, {subjects[1]}, {subjects[2]}"
+joined_students = ', '.join(students)
+joined_subjects = ', '.join(subjects)
+string = f"Students {joined_students} study these subjects: {joined_subjects}"
 print(string)
+
