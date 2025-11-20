@@ -2,7 +2,8 @@ import sys as sys
 
 sys.set_int_max_str_digits(0)
 
-def fib_progression(limit): #6
+
+def fib_progression(limit):  # 6
     current_index_number = 0
     # 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233,
     current_number = 0
@@ -28,5 +29,3 @@ print(get_fib_progr_number_by_index(5))
 print(get_fib_progr_number_by_index(200))
 print(get_fib_progr_number_by_index(1000))
 print(get_fib_progr_number_by_index(100000))
-
-

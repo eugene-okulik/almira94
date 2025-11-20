@@ -1,5 +1,6 @@
 from random import randrange, choice
 
+
 def random_bonus_to_salary():
     salary = int(input('Type your salary: '))
     bonus = choice([True, False])
