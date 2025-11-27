@@ -4,4 +4,4 @@ hot_days = list(filter(lambda x: x > 28, temperatures))
 
 print(max(hot_days))
 print(min(hot_days))
-print(sum(hot_days)/len(hot_days))
+print(sum(hot_days) / len(hot_days))
