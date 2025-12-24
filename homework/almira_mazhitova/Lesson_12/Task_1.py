@@ -1,4 +1,6 @@
 from operator import attrgetter
+
+
 class Flowers:
     def __init__(self, inv_num, name, color, stem_length, freshness, price, vase_life):
         self.inv_num = inv_num
@@ -22,6 +24,7 @@ class Roses(Flowers):
         return f"Roses({self.inv_num}, 'Роза', {self.color}, {self.stem_length}, {self.freshness}, {self.price}, " \
                f"{self.vase_life}, {self.variety}, {self.having_thorns})"
 
+
 class Peonies(Flowers):
 
     def __init__(self, inv_num, color, stem_length, freshness, price, vase_life, kind, flower_size):
@@ -32,6 +35,7 @@ class Peonies(Flowers):
     def __repr__(self):
         return f"Peonies({self.inv_num}, 'Пион', {self.color}, {self.stem_length}, {self.freshness}, {self.price}, " \
                f"{self.vase_life}, {self.kind}, {self.flower_size})"
+
 
 class FillerFlowers(Flowers):
     def __init__(self, inv_num, name, color, stem_length, freshness, price, vase_life, volume, having_berries):
@@ -71,14 +75,12 @@ class Bouquet:
         avg_vase_life = sum_of_vase_life / len(self.flowers_list)
         return avg_vase_life
 
-    def sort_flowers(self, attr_name, reversed=False):
-
+    def sort_flowers(self, attr_name, reverse=False):
         if attr_name not in ['inv_num', 'color', 'stem_length', 'freshness', 'price', 'vase_life']:
             return f"Нельзя отсортировать по параметру {attr_name}"
-        new_sorted_list = sorted(self.flowers_list, key=attrgetter(attr_name), reverse=reversed)
+        new_sorted_list = sorted(self.flowers_list, key=attrgetter(attr_name), reverse=reverse)
 
         return new_sorted_list
-
 
     def find_flower_by_attr_value(self, attr_name, attr_value):
         found_flowers = []
