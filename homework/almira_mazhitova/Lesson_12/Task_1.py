@@ -1,6 +1,8 @@
+from operator import attrgetter
 class Flowers:
-    def __init__(self, inv_num, color, stem_length, freshness, price, vase_life):
+    def __init__(self, inv_num, name, color, stem_length, freshness, price, vase_life):
         self.inv_num = inv_num
+        self.name = name
         self.price = price  # стоимость 1-го цветка
         self.stem_length = stem_length  # длина стебля
         self.color = color  # цвет
@@ -9,37 +11,47 @@ class Flowers:
 
 
 class Roses(Flowers):
-    name = 'Роза'
 
     def __init__(self, inv_num, color, stem_length, freshness, price, vase_life, variety, having_thorns):
-        super().__init__(inv_num, color, stem_length, freshness, price, vase_life)
+        super().__init__(inv_num, 'Роза', color, stem_length, freshness, price, vase_life)
         self.variety = variety  # сорт
         self.having_thorns = having_thorns  # наличие шипов
         self.vase_life = vase_life
 
+    def __repr__(self):
+        return f"Roses({self.inv_num}, 'Роза', {self.color}, {self.stem_length}, {self.freshness}, {self.price}, " \
+               f"{self.vase_life}, {self.variety}, {self.having_thorns})"
 
 class Peonies(Flowers):
-    name = 'Пион'
 
     def __init__(self, inv_num, color, stem_length, freshness, price, vase_life, kind, flower_size):
-        super().__init__(inv_num, color, stem_length, freshness, price, vase_life)
+        super().__init__(inv_num, 'Пион', color, stem_length, freshness, price, vase_life)
         self.kind = kind  # вид
         self.flower_size = flower_size  # диаметр цветка в см
 
+    def __repr__(self):
+        return f"Peonies({self.inv_num}, 'Пион', {self.color}, {self.stem_length}, {self.freshness}, {self.price}, " \
+               f"{self.vase_life}, {self.kind}, {self.flower_size})"
 
 class FillerFlowers(Flowers):
     def __init__(self, inv_num, name, color, stem_length, freshness, price, vase_life, volume, having_berries):
-        super().__init__(inv_num, color, stem_length, freshness, price, vase_life)
-        self.name = name  # наименование
+        super().__init__(inv_num, name, color, stem_length, freshness, price, vase_life)
         self.volume = volume  # объемность
         self.having_berries = having_berries  # наличие ягодок
+
+    def __repr__(self):
+        return f"FillerFlowers({self.inv_num}, {self.name}, {self.color}, {self.stem_length}, {self.freshness}, " \
+               f"{self.price}, {self.vase_life}, {self.volume}, {self.having_berries})"
 
 
 class ExoticFlowers(Flowers):
     def __init__(self, inv_num, name, color, stem_length, freshness, price, vase_life, specificity):
-        super().__init__(inv_num, color, stem_length, freshness, price, vase_life)
-        self.name = name  # наименование
+        super().__init__(inv_num, name, color, stem_length, freshness, price, vase_life)
         self.specificity = specificity  # особенность
+
+    def __repr__(self):
+        return f"ExoticFlowers({self.inv_num}, {self.name}, {self.color}, {self.stem_length}, {self.freshness}, " \
+               f"{self.price}, {self.vase_life}, {self.specificity}"
 
 
 class Bouquet:
@@ -59,43 +71,22 @@ class Bouquet:
         avg_vase_life = sum_of_vase_life / len(self.flowers_list)
         return avg_vase_life
 
-    def sort_flowers_asc_order(self, attr_name):
+    def sort_flowers(self, attr_name, reversed=False):
+
         if attr_name not in ['inv_num', 'color', 'stem_length', 'freshness', 'price', 'vase_life']:
             return f"Нельзя отсортировать по параметру {attr_name}"
-        new_sorted_list = self.flowers_list[:]
-        n = len(new_sorted_list)
-        for i in range(n):
-            for j in range(0, n - i - 1):
-                value_1 = new_sorted_list[j].__dict__[attr_name]
-                value_2 = new_sorted_list[j + 1].__dict__[attr_name]
-                if value_1 > value_2:
-                    new_sorted_list[j], new_sorted_list[j + 1] = new_sorted_list[j + 1], new_sorted_list[j]
-        returned_list = []
-        for flower in new_sorted_list:
-            returned_list.append(flower.inv_num)
+        new_sorted_list = sorted(self.flowers_list, key=attrgetter(attr_name), reverse=reversed)
 
-        return returned_list
+        return new_sorted_list
 
-    def sort_flowers_desc_order(self, attr_name):
-        new_sorted_list = self.flowers_list[:]
-        n = len(new_sorted_list)
-        for i in range(n):
-            for j in range(0, n - i - 1):
-                value_1 = new_sorted_list[j].__dict__[attr_name]
-                value_2 = new_sorted_list[j + 1].__dict__[attr_name]
-                if value_1 < value_2:
-                    new_sorted_list[j], new_sorted_list[j + 1] = new_sorted_list[j + 1], new_sorted_list[j]
-
-        returned_list = []
-        for flower in new_sorted_list:
-            returned_list.append(flower.inv_num)
-
-        return returned_list
 
     def find_flower_by_attr_value(self, attr_name, attr_value):
+        found_flowers = []
         for flower in self.flowers_list:
-            if flower.__dict__[attr_name] == attr_value:
-                return f"Инвентарный номер цветка с искомым параметром: {flower.inv_num}"
+            if getattr(flower, attr_name, None) == attr_value:
+                found_flowers.append(flower)
+        if found_flowers:
+            return found_flowers
         return f"В данном букете отсутствуют цветы с параметром {attr_name} = {attr_value}"
 
 
@@ -119,6 +110,6 @@ bouquet_1 = Bouquet([flwr_2, flwr_3, flwr_4, flwr_11])
 
 print(bouquet_1.calc_bouquet_cost())
 print(bouquet_1.calc_time_to_bouquet_wilt())
-print(bouquet_1.sort_flowers_asc_order('freshness'))
-print(bouquet_1.sort_flowers_desc_order('vase_life'))
-print(bouquet_1.find_flower_by_attr_value('vase_life', 28))
+print(bouquet_1.sort_flowers('freshness'))
+print(bouquet_1.sort_flowers('vase_life', True))
+print(bouquet_1.find_flower_by_attr_value('vase_life', 8))
