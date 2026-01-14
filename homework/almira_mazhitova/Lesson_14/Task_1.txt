@@ -1,0 +1,43 @@
+insert into students (name, second_name, group_id) values ('Almira', 'Mazhitova', NULL)
+
+insert into books (title, taken_by_student_id) values ('Два капитана', 21953)
+
+insert into books (title, taken_by_student_id) values ('Дневник Бриджит Джонс', 21953)
+
+insert into `groups` (title, start_date, end_date) values ('January_2026', 'Jan 2026', 'Feb 2026')
+
+update students s set group_id = 21720 where id = 21953
+
+insert into subjects (title) values ('db_subject222')
+
+insert into subjects (title) values ('db_subject333')
+
+insert into lessons (title, subject_id) values ('db_subject222_introduction', 13364)
+
+insert into lessons (title, subject_id) values ('db_subject222_basis', 13364)
+
+insert into lessons (title, subject_id) values ('db_subject333_introduction', 13365)
+
+insert into lessons (title, subject_id) values ('db_subject333_basis', 13365)
+
+insert into marks (value, lesson_id, student_id) values ('4', 74060, 21953)
+
+insert into marks (value, lesson_id, student_id) values ('5', 74061, 21953)
+
+insert into marks (value, lesson_id, student_id) values ('3', 74062, 21953)
+
+insert into marks (value, lesson_id, student_id) values ('2', 74063, 21953)
+
+select m.value from marks m where m.student_id = 21953
+
+select b.title from books b where b.taken_by_student_id = 21953
+
+select * from students s
+join `groups` g on g.id = s.group_id
+join books b on b.taken_by_student_id = s.id
+join marks m on m.student_id = s.id
+join lessons l on l.id = m.lesson_id
+join subjects s2 on s2.id = l.subject_id
+where s.id = 21953
+
+
