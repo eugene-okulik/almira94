@@ -12,7 +12,6 @@ cursor = db.cursor(dictionary=True)
 
 cursor.execute("INSERT INTO students (name, second_name, group_id) values ('Almira 1', 'Mazhitova 1', NULL)")
 student_id = cursor.lastrowid
-print(f"student_id={student_id}")
 
 cursor.execute(f"INSERT INTO books (title, taken_by_student_id) values ('Два капитана 1', {student_id})")
 
@@ -20,7 +19,6 @@ cursor.execute(f"INSERT INTO books (title, taken_by_student_id) values ('Дне�
 
 cursor.execute("INSERT INTO `groups` (title, start_date, end_date) values ('January1_2026', 'Jan 2026', 'Feb 2026')")
 group_id = cursor.lastrowid
-print(f"group_id={group_id}")
 
 cursor.execute(F"UPDATE students s SET group_id = {group_id} where id = {student_id}")
 
@@ -29,23 +27,18 @@ subj1_id = cursor.lastrowid
 
 cursor.execute("INSERT INTO subjects (title) values ('db_subject333_1')")
 subj2_id = cursor.lastrowid
-print(f"subj2_id={subj2_id}")
 
 cursor.execute(f"INSERT INTO lessons (title, subject_id) values ('db_subject222_1_introduction_1', {subj1_id})")
 lesson1_id = cursor.lastrowid
-print(f"lesson1_id={lesson1_id}")
 
 cursor.execute(f"INSERT INTO lessons (title, subject_id) values ('db_subject222_1_basis_1', {subj1_id})")
 lesson2_id = cursor.lastrowid
-print(f"lesson2_id={lesson2_id}")
 
 cursor.execute(f"INSERT INTO lessons (title, subject_id) values ('db_subject333_1_introduction_1', {subj2_id})")
 lesson3_id = cursor.lastrowid
-print(f"lesson3_id={lesson3_id}")
 
 cursor.execute(f"INSERT INTO lessons (title, subject_id) values ('db_subject333_1_basis_1', {subj2_id})")
 lesson4_id = cursor.lastrowid
-print(f"lesson4_id={lesson4_id}")
 
 cursor.execute(f"INSERT INTO marks (value, lesson_id, student_id) values ('3', {lesson1_id}, {student_id})")
 
