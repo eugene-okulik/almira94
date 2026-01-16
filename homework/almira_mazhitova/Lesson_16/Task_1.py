@@ -20,7 +20,7 @@ csv_file_path = os.path.join(homework_path, 'eugene_okulik', 'Lesson_16', 'hw_da
 
 
 def check_row_in_db(row_item):
-    query1 = f"""
+    query1 = """
 select count(*) as cocount
 from students s
 join `groups` g on g.id = s.group_id
@@ -29,7 +29,7 @@ join marks m on m.student_id = s.id
 join lessons l on l.id = m.lesson_id
 join subjects s2 on s2.id = l.subject_id
 where s.name = %s and s.second_name = %s
-and g.title = %s and b.title = %s  
+and g.title = %s and b.title = %s
 and s2.title = %s and l.title = %s
 and m.value = %s
     """
