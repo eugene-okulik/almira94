@@ -1,6 +1,7 @@
 import random
 import requests
 
+
 def get_all_objects():
     response = requests.get('http://objapi.course.qa-practice.com/object').json()
     assert len(response) >= 0, 'No objects!'
@@ -97,7 +98,6 @@ def update_object_patch_name():
     # print(f"patch_update_name_response={response}")
 
     assert response.get("name") == body.get("name")
-
 
 
 def update_object_patch_data():
