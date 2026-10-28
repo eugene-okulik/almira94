@@ -25,7 +25,7 @@ def create_and_return_new_object_info():
     }
     headers = {'Content-Type': 'application/json'}
     response = requests.post(
-        f'http://objapi.course.qa-practice.com/object',
+        'http://objapi.course.qa-practice.com/object',
         json=body,
         headers=headers
     ).json()
@@ -48,7 +48,7 @@ def create_object():
     }
     headers = {'Content-Type': 'application/json'}
     response = requests.post(
-        f'http://objapi.course.qa-practice.com/object',
+        'http://objapi.course.qa-practice.com/object',
         json=body,
         headers=headers
     ).json()
