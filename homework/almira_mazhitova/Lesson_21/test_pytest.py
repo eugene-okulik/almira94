@@ -36,7 +36,7 @@ def test_create_object(setup_teardown_session, setup_teardown_function, name, co
             json=body,
             headers=headers
         ).json()
-        
+
     with allure.step('Проверяем data полученного ответа'):
         assert response.get("data") == body.get("data")
 
@@ -51,7 +51,7 @@ def test_create_object(setup_teardown_session, setup_teardown_function, name, co
 def test_update_object_put(setup_teardown_session, setup_teardown_function, create_and_delete_new_object):
     with allure.step('Получаем ответ на создание нового поста из предусловия'):
         new_object = create_and_delete_new_object
-        
+
     with allure.step('Получаем id созданного поста'):
         new_object_id = new_object.get("id")
 
